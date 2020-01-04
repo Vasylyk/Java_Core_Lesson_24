@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.TreeMap;
 
 public class Cinema {
-    private TreeMap<Days, Schedule> schedules = new TreeMap<>();
+    private TreeMap<String , Schedule> schedules = new TreeMap<>();
     private ArrayList<Movie> moviesLibrary = new ArrayList<>();
     private Time open;
     private Time close;
@@ -33,7 +33,7 @@ public class Cinema {
         this.close = close;
     }
 
-    public TreeMap<Days, Schedule> getSchedules() {
+    public TreeMap<String , Schedule> getSchedules() {
         return schedules;
     }
 
@@ -57,12 +57,12 @@ public class Cinema {
 
     public void addSeance(Seance seance, String day){
         if ((seance.getStartTime().getHour()>=open.getHour())&&(seance.getEndTime().getHour()<close.getHour())){
-            Optional<Map.Entry<Days, Schedule>>  daySchedule = schedules.entrySet().stream().filter(x->x.getKey().equals(day)).findFirst();
+            Optional<Map.Entry<String , Schedule>>  daySchedule = schedules.entrySet().stream().filter(x->x.getKey().equals(day)).findFirst();
             if (daySchedule.isPresent()){
                 daySchedule.get().getValue().addSeance(seance);
             } else {
-                schedules.put(Days.valueOf(day), new Schedule());
-                schedules.entrySet().stream().filter(x->x.getKey().equals(day)).findFirst().get().getValue().addSeance(seance);
+                schedules.put(day, new Schedule());
+                schedules.entrySet().stream().filter(x->x.getKey().equals(day)).findFirst().get().getValue().getSeances().add(seance);
             }
         } else {
             System.out.println("Cinema is closed in this time");

@@ -29,10 +29,9 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" +
+        return "Movie: " +
                 "title='" + title + '\'' +
-                ", duration=" + duration +
-                '}';
+                ", duration = " + duration;
     }
 
     @Override
