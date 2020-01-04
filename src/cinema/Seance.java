@@ -2,7 +2,7 @@ package cinema;
 
 import java.util.Objects;
 
-public class Seance {
+public class Seance implements Comparable<Seance>{
     private Movie movie;
     private Time startTime;
     private Time endTime;
@@ -43,11 +43,8 @@ public class Seance {
 
     @Override
     public String toString() {
-        return "Seance{" +
-                "movie=" + movie +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                '}';
+        return movie + ", startTime=" + startTime +
+                ", endTime=" + endTime;
     }
 
     @Override
@@ -64,5 +61,14 @@ public class Seance {
     public int hashCode() {
 
         return Objects.hash(movie, startTime, endTime);
+    }
+
+    @Override
+    public int compareTo(Seance seance) {
+        if (this.getStartTime().getHour() == seance.getStartTime().getHour()) {
+            return this.getStartTime().getMin() - seance.getStartTime().getMin();
+        } else {
+            return this.getStartTime().getHour() - seance.getStartTime().getHour();
+        }
     }
 }

@@ -13,7 +13,9 @@ public class Main {
             System.out.println("1-add movie");
             System.out.println("2-add seance");
             System.out.println("3-remove movie");
-            System.out.println("4-show movies library");
+            System.out.println("4-remove seance");
+            System.out.println("5-show movies library");
+            System.out.println("6-show seances in some day");
 
             switch (s.nextInt()) {
                 case 1: {
@@ -39,9 +41,8 @@ public class Main {
                     int min = sc.nextInt();
                     String nextInt = sc.nextLine();
                     System.out.println("Write day");
-                    String day = sc.nextLine();
+                    String day = sc.nextLine().toUpperCase();
                     cinema.addSeance(new Seance(movie.get(), new Time(hour, min)), day);
-                    System.out.println("test");
                     break;
                 }
                 case 3:{
@@ -52,7 +53,22 @@ public class Main {
                     break;
                 }
                 case 4:{
+                    System.out.println("Write from witch day you want to remove seance");
+                    String day = sc.nextLine().toUpperCase();
+                    System.out.println("Write title of movie, seance of witch you want to remove:");
+                    String title = sc.nextLine();
+                    Optional<Seance>seance = cinema.getSchedules().get(day).getSeances().stream().filter(x->x.getMovie().getTitle().equalsIgnoreCase(title)).findFirst();
+                    cinema.removeSeance(seance.get(), day);
+                    break;
+                }
+                case 5:{
                     System.out.println(cinema.getMoviesLibrary().toString());
+                    break;
+                }
+                case 6:{
+                    System.out.println("Write day:");
+                    String day = sc.nextLine().toUpperCase();
+                    cinema.showSchedule(day);
                     break;
                 }
             }

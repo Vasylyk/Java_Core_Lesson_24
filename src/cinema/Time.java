@@ -42,7 +42,7 @@ public class Time {
 
     @Override
     public String toString() {
-        return "Time: " + hour +" hours "+min+" min";
+        return " "+hour +" hours "+min+" min";
     }
 
     public static void normalizeTime(Time time){
